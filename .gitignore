@@ -1,0 +1,14 @@
+# Environment & secrets
+.env
+
+# Data files (large, user-uploaded)
+data/raw_pdfs/
+data/markdown/
+
+# Logs and results
+logs/
+evaluation/results/
+.pytest_cache/
+
+# MCP OAuth tokens (local, machine-specific)
+.investor_intelligence_mcp_tokens/

@@ -1,0 +1,111 @@
+questions:
+  # Exact-number lookups
+  - id: q1
+    question: "What was Apple's revenue for the quarter ended June 27, 2026?"
+    type: exact_number
+    expected_answer: "109417"
+    expected_unit: "USD millions"
+    relevant_companies: ["Apple Inc."]
+
+  - id: q2
+    question: "What was Alphabet's net income for the quarter ended June 30, 2026?"
+    type: exact_number
+    expected_answer: "112193"
+    expected_unit: "USD millions"
+    relevant_companies: ["Alphabet Inc."]
+
+  - id: q3
+    question: "What was Amazon's revenue for Q2 2026?"
+    type: exact_number
+    expected_answer: "200606"
+    expected_unit: "USD millions"
+    relevant_companies: ["Amazon.com, Inc."]
+
+  - id: q4
+    question: "What was Apple's net income for the quarter ended June 27, 2026?"
+    type: exact_number
+    expected_answer: "29789"
+    expected_unit: "USD millions"
+    relevant_companies: ["Apple Inc."]
+
+  - id: q5
+    question: "What was Amazon's net income for Q2 2026?"
+    type: exact_number
+    expected_answer: "62647"
+    expected_unit: "USD millions"
+    relevant_companies: ["Amazon.com, Inc."]
+
+  # Comparative questions
+  - id: q6
+    question: "Compare Apple's and Alphabet's net income for their most recent quarter."
+    type: comparative
+    expected_answer: "Alphabet's net income ($112,193M) was higher than Apple's ($29,789M)"
+    relevant_companies: ["Apple Inc.", "Alphabet Inc."]
+
+  - id: q7
+    question: "Which company had higher revenue — Amazon or Alphabet — in Q2 2026?"
+    type: comparative
+    expected_answer: "Amazon had higher revenue ($200,606M vs $119,796M)"
+    relevant_companies: ["Amazon.com, Inc.", "Alphabet Inc."]
+
+  - id: q8
+    question: "Rank Apple, Alphabet, and Amazon by net income for their most recent quarter."
+    type: comparative
+    expected_answer: "Alphabet ($112,193M) > Amazon ($62,647M) > Apple ($29,789M)"
+    relevant_companies: ["Apple Inc.", "Alphabet Inc.", "Amazon.com, Inc."]
+
+  # Adversarial / period-confusion (the exact bug class we found and fixed)
+  - id: q9
+    question: "What was Alphabet's net income for the six months ended June 30, 2026 — not the quarter?"
+    type: adversarial
+    expected_answer: "174771"
+    expected_unit: "USD millions"
+    relevant_companies: ["Alphabet Inc."]
+    note: "Tests whether the system can distinguish six-month vs three-month columns when explicitly asked for six-month"
+
+  - id: q10
+    question: "What was Apple's revenue for the nine months ended (cumulative), not just the quarter?"
+    type: adversarial
+    expected_answer: "not confidently answerable from ingested data (only quarterly Q3 chunk was ingested)"
+    relevant_companies: ["Apple Inc."]
+    note: "Should trigger 'not found' or appropriate caveat, not a hallucinated number"
+
+  # Qualitative
+  - id: q11
+    question: "What were the main drivers of Alphabet's revenue growth in Q2 2026?"
+    type: qualitative
+    expected_answer: "Google Search & other growth, Google Cloud growth (Google Services +15%, Google Cloud +82%)"
+    relevant_companies: ["Alphabet Inc."]
+
+  # Out-of-scope / guardrail check
+  - id: q12
+    question: "What is the capital of France?"
+    type: out_of_scope
+    expected_answer: "should decline or state this is outside the scope of financial report analysis"
+    relevant_companies: []
+
+  - id: q13
+    question: "What was Tesla's revenue last quarter?"
+    type: out_of_scope
+    expected_answer: "should state Tesla is not among the ingested companies"
+    relevant_companies: []
+
+  # MCP-routing questions (live market data)
+  - id: q14
+    question: "What is Apple's current stock price?"
+    type: mcp_routing
+    expected_route: "mcp"
+    relevant_companies: ["Apple Inc."]
+
+  - id: q15
+    question: "What are Alphabet's current financial ratios (P/E, ROE)?"
+    type: mcp_routing
+    expected_route: "mcp"
+    relevant_companies: ["Alphabet Inc."]
+
+  # RAG-routing sanity check (should NOT go to mcp)
+  - id: q16
+    question: "What was Amazon's reported net income last quarter according to their filing?"
+    type: rag_routing
+    expected_route: "rag"
+    relevant_companies: ["Amazon.com, Inc."]

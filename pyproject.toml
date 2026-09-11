@@ -1,0 +1,38 @@
+[project]
+name = "investor-intelligence-agent"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.141.1",
+    "fastembed>=0.8.0",
+    "fastmcp>=4.0.3",
+    "langchain-community>=0.4.2",
+    "langchain-core>=1.6.2",
+    "langchain-google-genai>=4.4.0",
+    "langchain-groq>=1.1.3",
+    "langchain-text-splitters>=1.1.2",
+    "langgraph>=1.2.11",
+    "langsmith>=0.12.2",
+    "loguru>=0.7.3",
+    "pdfplumber>=0.11.10",
+    "plotly>=7.0.0",
+    "prometheus-client>=0.26.0",
+    "psycopg2-binary>=2.9.12",
+    "py-key-value-aio[disk]>=0.4.5",
+    "pydantic-settings>=2.15.0",
+    "pymupdf4llm>=1.28.2",
+    "qdrant-client>=1.19.0",
+    "redis>=8.1.0",
+    "requests>=2.34.2",
+    "sentence-transformers>=6.0.1",
+    "sqlalchemy>=2.0.52",
+    "streamlit>=1.63.0",
+    "uvicorn[standard]>=0.52.4",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
