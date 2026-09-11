@@ -29,6 +29,7 @@ dependencies = [
     "sentence-transformers>=6.0.1",
     "sqlalchemy>=2.0.52",
     "streamlit>=1.63.0",
+    "torch>=2.0.0",
     "uvicorn[standard]>=0.52.4",
 ]
 
@@ -36,3 +37,11 @@ dependencies = [
 dev = [
     "pytest>=9.1.1",
 ]
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
