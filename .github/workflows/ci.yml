@@ -10,6 +10,15 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    env:
+      LLM__GROQ_API_KEY: "dummy-test-key"
+      LLM__GEMINI_API_KEY: "dummy-test-key"
+      DATABASE__URL: "postgresql://dummy:dummy@localhost:5432/dummy"
+      MCP__SERVER_URL: "http://localhost:8000/mcp"
+      MCP__AUTH_TOKEN: "dummy-test-token"
+      SECURITY__BEARER_TOKEN: "dummy-test-token"
+      MONITORING__LANGSMITH_API_KEY: "dummy-test-key"
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
