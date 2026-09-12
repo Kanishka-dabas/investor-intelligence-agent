@@ -50,6 +50,7 @@ services:
     environment:
       - VECTORDB__HOST=qdrant
       - REDIS__HOST=redis
+      - API_BASE_URL=http://api:8000
     depends_on:
       - api
     restart: unless-stopped
