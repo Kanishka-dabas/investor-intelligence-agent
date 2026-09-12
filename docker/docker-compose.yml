@@ -34,6 +34,7 @@ services:
       - REDIS__HOST=redis
     volumes:
       - ../data:/app/data
+      - ~/.investor_intelligence_mcp_tokens:/root/.investor_intelligence_mcp_tokens
     depends_on:
       - qdrant
       - redis
