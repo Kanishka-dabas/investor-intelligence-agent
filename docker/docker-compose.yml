@@ -60,6 +60,17 @@ services:
       - api
     restart: unless-stopped
     command: ["uv", "run", "streamlit", "run", "frontend/app.py", "--server.address=0.0.0.0"]
+  
+  mcp-server:
+    build:
+      context: ../../financial-data-mcp-server
+      dockerfile: Dockerfile
+    container_name: investor-intel-mcp-server
+    ports:
+      - "8001:8000"
+    environment:
+      - MCP_AUTH_TOKEN=g9ZJiJrd_QcKx8BoA9vMg4b89BLK-1CGjqCxakyp7Yo
+    restart: unless-stopped
 
 volumes:
   qdrant_data:

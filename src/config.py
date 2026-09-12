@@ -35,6 +35,7 @@ class RedisSettings(BaseModel):
 
 class MCPSettings(BaseModel):
     server_url: str
+    auth_token: SecretStr
 
 
 class SecuritySettings(BaseModel):
